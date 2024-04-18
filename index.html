@@ -3,44 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>goit-js-hw-11</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>goit-js-hw-12</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css"
     />
+    
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-b9f84ab9.js">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-e5212ee8.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-3e58319b.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-f736e62a.js">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-4b066c51.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-fbfaac96.css">
   </head>
   <body>
-    <div class="form">
-      <form class="searching-form" autocomplete="off">
-        <input
-          type="search"
-          name="search"
-          placeholder="Search Images..."
-          required
-        />
-        <button type="submit">Search</button>
-      </form>
-    </div>
+    <form class="form">
+      <input type="text" class="search-input" placeholder="Search images..." />
+      <button type="submit" class="search-button">Search</button>
+    </form>
 
-    <div class="container">
-      <span class="loader"></span>
-    </div>
+    <ul class="gallery"></ul>
+    <button type="button" class="load-more-btn">Load more</button>
+    <div class="loader"></div>
 
-    <div>
-      <ul class="gallery"></ul>
-      <button class="load-more" style="display: none">Load more</button>
-      <p class="end-message" style="display: none">
-        We're sorry, but you've reached the end of search results.
-      </p>
-    </div>
-
+    <script src="https://pixabay.com/api/docs/"></script>
     
   </body>
 </html>
