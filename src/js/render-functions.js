@@ -1,13 +1,22 @@
-export function clearGallery() {
-  const galleryImages = document.querySelector('.gallery');
-  galleryImages.innerHTML = '';
+// модуль 2 'render-functions.js'
+
+import SimpleLightbox from 'simplelightbox';
+
+export const galleryElement = document.querySelector('.gallery');
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+lightbox.refresh();
+
+export function renderPic(data) {
+  galleryElement.insertAdjacentHTML('beforeend', generateMarkup(data));
+  lightbox.refresh();
 }
-
-export function renderImages(data) {
-  clearGallery();
-
-  const galleryImages = document.querySelector('.gallery');
-  const galleryMarkup = data
+function generateMarkup(data) {
+  return data
     .map(
       ({
         webformatURL,
@@ -17,60 +26,26 @@ export function renderImages(data) {
         views,
         comments,
         downloads,
-      }) => {
-        return `<li class="gallery-item">
-          <a class="gallery-link" href="${largeImageURL}">
-            <img
-              src="${webformatURL}"
-              data-source="${largeImageURL}"
-              alt="${tags}"
-            />
-            <ul class="gallery-description">
-              <li class="gallery-dscr_item"><h3>Likes</h3><p>${likes}</p></li>
-              <li class="gallery-dscr_item"><h3>Views</h3><p>${views}</p></li>
-              <li class="gallery-dscr_item"><h3>Comments</h3><p>${comments}</p></li>
-              <li class="gallery-dscr_item"><h3>Downloads</h3><p>${downloads}</p></li>
-            </ul>
-          </a>
-        </li>`;
-      }
+      }) =>
+        `<li class="card">
+        <a href="${largeImageURL}" class="link">
+          <img src="${webformatURL}" alt="${tags}">
+          <ul class="list-container">
+          <li class="item-description"><h3>Likes</h3> <p>${likes}</p></li>
+          <li class="item-description"><h3>Views</h3> <p>${views}</p></li>
+          <li class="item-description"><h3>Comments</h3> <p>${comments}</p></li>
+          <li class="item-description"><h3>Downloads</h3> <p>${downloads}</p></li>
+        </ul>
+        </a>
+      
+      </li>`
     )
-    .join('');
-
-  galleryImages.innerHTML = galleryMarkup;
+    .join(' ');
 }
-
-export function appendImages(newImages) {
-  const galleryImages = document.querySelector('.gallery');
-  const galleryMarkup = newImages
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => {
-        return `<li class="gallery-item">
-          <a class="gallery-link" href="${largeImageURL}">
-            <img
-              src="${webformatURL}"
-              data-source="${largeImageURL}"
-              alt="${tags}"
-            />
-            <ul class="gallery-description">
-              <li class="gallery-dscr_item"><h3>Likes</h3><p>${likes}</p></li>
-              <li class="gallery-dscr_item"><h3>Views</h3><p>${views}</p></li>
-              <li class="gallery-dscr_item"><h3>Comments</h3><p>${comments}</p></li>
-              <li class="gallery-dscr_item"><h3>Downloads</h3><p>${downloads}</p></li>
-            </ul>
-          </a>
-        </li>`;
-      }
-    )
-    .join('');
-
-  galleryImages.innerHTML += galleryMarkup;
+export function showEndMessage() {
+  const endMessage = document.createElement('p');
+  endMessage.classList.add('end-message');
+  endMessage.textContent =
+    "We're sorry, but you've reached the end of search results.";
+  galleryElement.insertAdjacentElement('afterend', endMessage);
 }
